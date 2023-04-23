@@ -32,47 +32,48 @@ class _HomePageState extends State<HomePage> {
   bool isVideos = true;
   bool isLogin = true;
 
-  BannerAd? _bannerAd;
+  // BannerAd? _bannerAd;
 
-  InterstitialAd? _interstitialAd;
-  bool _isInterstitialAdLoaded = false;
+  // InterstitialAd? _interstitialAd;
+  // bool _isInterstitialAdLoaded = false;
 
   @override
   void initState() {
     // checkCookies();
-
-    _bannerAd = BannerAd(
-      adUnitId: "ca-app-pub-8947607922376336/9629827794",
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          setState(() {
-            // _isBottomBannerAdLoaded = true;
-          });
-        },
-        onAdFailedToLoad: (ad, error) {
-          setState(() {
-            // _isBottomBannerAdLoaded = false;
-          });
-          ad.dispose();
-        },
-      ),
-      request: const AdRequest(),
-    )..load();
-     InterstitialAd.load(
-      adUnitId: "ca-app-pub-8947607922376336/2382689325",
-      request: const AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (InterstitialAd ad) {
-          _interstitialAd = ad;
-          _isInterstitialAdLoaded = true;
-        },
-        onAdFailedToLoad: (LoadAdError error) {
-          _isInterstitialAdLoaded = false;
-          _interstitialAd?.dispose();
-        },
-      ),
-    );
+    // print(downloadController);
+    // print("DSMDSKJDSJKDSJKDS");
+    // _bannerAd = BannerAd(
+    //   adUnitId: "ca-app-pub-8947607922376336/9629827794",
+    //   size: AdSize.banner,
+    //   listener: BannerAdListener(
+    //     onAdLoaded: (_) {
+    //       setState(() {
+    //         // _isBottomBannerAdLoaded = true;
+    //       });
+    //     },
+    //     onAdFailedToLoad: (ad, error) {
+    //       setState(() {
+    //         // _isBottomBannerAdLoaded = false;
+    //       });
+    //       ad.dispose();
+    //     },
+    //   ),
+    //   request: const AdRequest(),
+    // )..load();
+    //  InterstitialAd.load(
+    //   adUnitId: "ca-app-pub-8947607922376336/2382689325",
+    //   request: const AdRequest(),
+    //   adLoadCallback: InterstitialAdLoadCallback(
+    //     onAdLoaded: (InterstitialAd ad) {
+    //       _interstitialAd = ad;
+    //       _isInterstitialAdLoaded = true;
+    //     },
+    //     onAdFailedToLoad: (LoadAdError error) {
+    //       _isInterstitialAdLoaded = false;
+    //       _interstitialAd?.dispose();
+    //     },
+    //   ),
+    // );
   
   super.initState();
 
@@ -102,11 +103,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-   @override
-  void dispose() {
-    _interstitialAd?.dispose();
-    super.dispose();
-  }
+  //  @override
+  // void dispose() {
+  //   _interstitialAd?.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +141,7 @@ class _HomePageState extends State<HomePage> {
 
                               child: const Center(
                                 child: Image(
-                                  image: AssetImage("images/instagra.png"),
+                                  image: AssetImage("images/mainlogo.png"),
                                   height: 25,
                                 ),
                               ),
@@ -179,10 +180,10 @@ class _HomePageState extends State<HomePage> {
                                     width: 50,
                                     child: IconButton(
                                         onPressed: () {
-                                           if (_isInterstitialAdLoaded) {
-                                              print("sdds...................................");
-                                        _interstitialAd?.show(); // <- here
-                                        }
+                                        //    if (_isInterstitialAdLoaded) {
+                                        //       print("sdds...................................");
+                                        // _interstitialAd?.show(); // <- here
+                                        // }
                                           Get.to(DownloadedList());
                                         },
                                         icon: const Icon(
@@ -201,8 +202,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                       const Padding(
                         padding: EdgeInsets.only(
-                            right: 30, top: 10, bottom: 10, left: 8),
-                        child: Image(image: AssetImage("images/df.png")),
+                            right: 0, left: 10),
+                        child: Image(image: AssetImage("images/allinsta.png",),height: 70,),
                         // child: Text(
                         //   "Insta Downloader",
                         //   style: TextStyle(color: Color.fromARGB(255, 233, 8, 8), fontSize: 32),
@@ -390,16 +391,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 10,
-                      // ),
+
                       // Positioned(
                       //   right: 0,
                       //   top: 20,
                       //   child: Container(
                       //     child: TextButton(
                       //         onPressed: () {},
-                      //         child: Text("Recent Downloads")),
+                      //         child: Text("No Recent Downloads")),
                       //   ),
                       // ),
                       GetBuilder(
@@ -418,10 +417,10 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
-                         SizedBox(
-                        height: 200,
-                        child: AdWidget(ad: _bannerAd!),
-                      ),
+                      //    SizedBox(
+                      //   height: 200,
+                      //   child: AdWidget(ad: _bannerAd!),
+                      // ),
                     ],
                   ),
                 ),

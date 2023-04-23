@@ -20,11 +20,11 @@ class _DownloadedListState extends State<DownloadedList> {
 
   bool isVideos = true;
 
-  BannerAd? _bannerAd;
-  late AppOpenAd? myAppOpenAd;
+  // BannerAd? _bannerAd;
+  // late AppOpenAd? myAppOpenAd;
 
-  InterstitialAd? _interstitialAd;
-  bool _isInterstitialAdLoaded = false;
+  // InterstitialAd? _interstitialAd;
+  // bool _isInterstitialAdLoaded = false;
 
   @override
   void initState() {
@@ -36,40 +36,40 @@ class _DownloadedListState extends State<DownloadedList> {
     }else{
         // allImages = box.read("allImage") ?? [];
     }
-    loadingVideos = false;
-    _bannerAd = BannerAd(
-      adUnitId: "ca-app-pub-8947607922376336/9629827794",
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          setState(() {
-            // _isBottomBannerAdLoaded = true;
-          });
-        },
-        onAdFailedToLoad: (ad, error) {
-          setState(() {
-            // _isBottomBannerAdLoaded = false;
-          });
-          ad.dispose();
-        },
-      ),
-      request: const AdRequest(),
-    )..load();
+  //   loadingVideos = false;
+  //   _bannerAd = BannerAd(
+  //     adUnitId: "ca-app-pub-8947607922376336/9629827794",
+  //     size: AdSize.banner,
+  //     listener: BannerAdListener(
+  //       onAdLoaded: (_) {
+  //         setState(() {
+  //           // _isBottomBannerAdLoaded = true;
+  //         });
+  //       },
+  //       onAdFailedToLoad: (ad, error) {
+  //         setState(() {
+  //           // _isBottomBannerAdLoaded = false;
+  //         });
+  //         ad.dispose();
+  //       },
+  //     ),
+  //     request: const AdRequest(),
+  //   )..load();
 
-   InterstitialAd.load(
-      adUnitId: "ca-app-pub-8947607922376336/2382689325",
-      request: const AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (InterstitialAd ad) {
-          _interstitialAd = ad;
-          _isInterstitialAdLoaded = true;
-        },
-        onAdFailedToLoad: (LoadAdError error) {
-          _isInterstitialAdLoaded = false;
-          _interstitialAd?.dispose();
-        },
-      ),
-    );
+  //  InterstitialAd.load(
+  //     adUnitId: "ca-app-pub-8947607922376336/2382689325",
+  //     request: const AdRequest(),
+  //     adLoadCallback: InterstitialAdLoadCallback(
+  //       onAdLoaded: (InterstitialAd ad) {
+  //         _interstitialAd = ad;
+  //         _isInterstitialAdLoaded = true;
+  //       },
+  //       onAdFailedToLoad: (LoadAdError error) {
+  //         _isInterstitialAdLoaded = false;
+  //         _interstitialAd?.dispose();
+  //       },
+  //     ),
+  //   );
 
     super.initState();
   }
@@ -106,12 +106,12 @@ class _DownloadedListState extends State<DownloadedList> {
       });     
   }
 
-   @override
-  void dispose() {
-    _bannerAd?.dispose();
-    _interstitialAd?.dispose();
-    super.dispose();
-  }
+  //  @override
+  // void dispose() {
+  //   _bannerAd?.dispose();
+  //   _interstitialAd?.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -300,11 +300,11 @@ class _DownloadedListState extends State<DownloadedList> {
                       ),
                     ],
                   ),
-                    SizedBox(
-                        height: 50,
-                        child: AdWidget(ad: _bannerAd!),
-                        // color: Colors.red,
-                      ),
+                    // SizedBox(
+                    //     height: 50,
+                    //     child: AdWidget(ad: _bannerAd!),
+                    //     // color: Colors.red,
+                    //   ),
                   Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
