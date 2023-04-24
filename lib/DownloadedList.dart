@@ -5,7 +5,7 @@ import 'package:instadownloader/GenerateVideoFromPath.dart';
 import 'package:instadownloader/GenrateImageFromPath.dart';
 import 'package:get/get.dart';
 import 'package:fluttericon/linecons_icons.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:instadownloader/home.dart';
 
 class DownloadedList extends StatefulWidget {

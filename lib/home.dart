@@ -12,7 +12,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:instadownloader/GenrateImageFromPath.dart';
 import 'package:instadownloader/RecentList.dart';
 import 'package:webview_cookie_manager/webview_cookie_manager.dart' as wb;
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
