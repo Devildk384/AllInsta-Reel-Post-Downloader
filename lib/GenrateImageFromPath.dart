@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:instadownloader/VideoPlayer.dart';
+import 'package:allIns/VideoPlayer.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:photo_view/photo_view.dart';
 import 'dart:io';
@@ -26,16 +28,36 @@ class _GenrateImageFrompathState extends State<GenrateImageFrompath> {
 
   @override
   void initState() {
-    loading = false;
+    void setTimeout(callback, time) {
+      Duration timeDelay = Duration(milliseconds: time);
+      print(
+          "SStimeDelaytimeDelaytimeDelay..........................................dsdsddsdsdsb");
+      Timer(timeDelay, callback);
+      print(
+          "timeDelaytimeDelaytimeDelay..........................................dsdsddsdsdsb");
+    }
+
+    void updateLoading() {
+      setState(() {
+        loading = false;
+      });
+    }
+
+    setTimeout(updateLoading, 1000);
+
     super.initState();
   }
 
   _deleteImage(String path) async {
     List allImagesPathList = box.read("allImage") ?? [];
+    List allData = box.read("all") ?? [];
+
     print(allImagesPathList);
     allImagesPathList.removeWhere((element) => element == path);
-    print(allImagesPathList);
+    allData.removeWhere((element) => element == path);
+
     box.write("allImage", allImagesPathList);
+    box.write("all", allData);
     File(path).delete();
   }
 
@@ -44,7 +66,9 @@ class _GenrateImageFrompathState extends State<GenrateImageFrompath> {
     return Container(
       color: Colors.transparent,
       child: loading
-          ? CupertinoActivityIndicator(color: Color.fromARGB(255, 238, 212, 13),)
+          ? CupertinoActivityIndicator(
+              color: Color.fromARGB(255, 238, 212, 13),
+            )
           : Column(
               children: [
                 InkWell(
@@ -63,11 +87,13 @@ class _GenrateImageFrompathState extends State<GenrateImageFrompath> {
                             //  image: FileImage(File(widget.path)),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          
-                          child: Image.file(File(widget.path),
-                          fit: BoxFit.cover,
-                          height: 200,
-                          width: 200,),
+
+                          child: Image.file(
+                            File(widget.path),
+                            fit: BoxFit.cover,
+                            height: 200,
+                            width: 200,
+                          ),
                         ),
                       ),
                     ],
@@ -143,7 +169,9 @@ class _GenrateImageFrompathState extends State<GenrateImageFrompath> {
                           ],
                         ),
                       )
-                    : Container(height: 2,)
+                    : Container(
+                        height: 2,
+                      )
               ],
             ),
     );

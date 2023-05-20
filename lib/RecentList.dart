@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:instadownloader/DownloadedList.dart';
-import 'package:instadownloader/GenerateVideoFromPath.dart';
-import 'package:instadownloader/GenrateImageFromPath.dart';
+import 'package:allIns/DownloadedList.dart';
+import 'package:allIns/GenerateVideoFromPath.dart';
+import 'package:allIns/GenrateImageFromPath.dart';
 import 'package:get/get.dart';
 import 'package:fluttericon/linecons_icons.dart';
+import 'package:allIns/Controller/DownloadController.dart';
 
 class RecentList extends StatefulWidget {
   final String? path;
   late bool? update;
 
-   RecentList({this.path, this.update, super.key});
+  RecentList({this.path, this.update, super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -19,6 +20,8 @@ class RecentList extends StatefulWidget {
 }
 
 class _RecentListState extends State<RecentList> {
+  DownloadController downloadController = Get.put(DownloadController());
+
   var box = GetStorage();
   bool loadingVideos = true;
   List allImages = [];
@@ -29,33 +32,25 @@ class _RecentListState extends State<RecentList> {
 
   @override
   void initState() {
-    print(widget.path);
-        print(widget.update);
+    print("SDKJDDSJKDSJKDS");
+    if (isVideos && widget.update == true) {
+      var allData = box.read("all") ?? [];
+      // var allImagesdata = box.read("allImage") ?? [];
+      var reversedList = new List.from(allData.reversed);
 
-          print("wiiii...............................................");
-
-    if (isVideos && widget.update == true ) {
-      var allVideosdata = box.read("allVideo") ?? [];
-      var allImagesdata = box.read("allImage") ?? [];
-      all = [...allVideosdata, ...allImagesdata];
-      print("...............................................");
-      print(allVideos);
-      print("...............................................");
-    }else{
-      var allVideosdata = box.read("allVideo") ?? [];
-      var allImagesdata = box.read("allImage") ?? [];
-      all = [...allVideosdata, ...allImagesdata];
+      all = [
+        ...reversedList,
+      ];
       print("...............................................");
       print(allVideos);
       print("...............................................");
     }
-    print(widget.path);
-    if (widget.path != null) {
-      print("ddkjdjkfdjfdkkkkkkkkkkkkkkkkkk");
-    }
-    updateImageState();
-    updateVideoState();
-    loadingVideos = false;
+    // if (widget.path != null) {
+    //   print("ddkjdjkfdjfdkkkkkkkkkkkkkkkkkk");
+    // }
+    // updateImageState();
+    // updateVideoState();
+    // loadingVideos = false;
     super.initState();
   }
 
@@ -88,14 +83,24 @@ class _RecentListState extends State<RecentList> {
     });
   }
 
-  
+  // updateImageState(value) async {
+  //   print("sdsddskjdskldskdskldsklsdklsdksdksdksdklklklsdklsdklds");
+  //   setState(() {
+  //     allImages = box.read("allImage") ?? [];
+  //   });
+  // }
+
+  // updateVideoState(value) async {
+  //   setState(() {
+  //     allVideos = box.read("allVideo") ?? [];
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 280,
-      decoration: const BoxDecoration(
-        ),
+      decoration: const BoxDecoration(),
       child: Column(
         children: [
           Padding(
@@ -105,11 +110,11 @@ class _RecentListState extends State<RecentList> {
               height: 50,
               width: 300,
               decoration: const BoxDecoration(
-                // color: Colors.black
-                ),
-              child:  TextButton(
-                onPressed: (){
-                   Get.to(DownloadedList());
+                  // color: Colors.black
+                  ),
+              child: TextButton(
+                onPressed: () {
+                  Get.to(DownloadedList());
                 },
                 child: const Text(
                   "View All",
@@ -120,24 +125,26 @@ class _RecentListState extends State<RecentList> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8,),
+            padding: const EdgeInsets.only(
+              left: 8,
+              right: 8,
+            ),
             child: SizedBox(
               // color: Colors.red,
-                 height: 220,
-                child: ListView.builder(
-                    itemCount: all.length < 6 ? all.length : 5,
-                    shrinkWrap: false,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      /// Create List Item tile
-                      return CategoriesTile(
-                          path: all[index],
-                          updateImageState: updateImageState,
-                          updateVideoState: updateVideoState);
-                    }),
-              ),
+              height: 220,
+              child: ListView.builder(
+                  itemCount: all.length < 6 ? all.length : 5,
+                  shrinkWrap: false,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    /// Create List Item tile
+                    return CategoriesTile(
+                        path: all[index],
+                        updateImageState: updateImageState,
+                        updateVideoState: updateVideoState);
+                  }),
             ),
-          
+          ),
         ],
       ),
     );
@@ -158,12 +165,11 @@ class CategoriesTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-          child: Column(
+      child: Column(
         children: <Widget>[
           ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Container(
+              child: SizedBox(
                 // color: Colors.red,
                 height: 220,
                 width: 150,
@@ -172,7 +178,7 @@ class CategoriesTile extends StatelessWidget {
                     : GenrateVideoFrompath(path ?? "", false, updateVideoState),
               )),
         ],
-      )),
+      ),
     );
   }
 }

@@ -1,4 +1,4 @@
-name: instadownloader
+name: allIns
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -53,6 +53,7 @@ dependencies:
   easy_image_viewer: ^1.2.0
   image_picker: ^0.8.7
   share_plus: ^6.3.1
+  double_back_to_close_app: ^2.1.0
   # google_mobile_ads: ^2.3.0
 
 dev_dependencies:

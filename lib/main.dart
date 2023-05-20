@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:instadownloader/home.dart';
+import 'package:allIns/home.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 // import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 
 // AppOpenAd? myAppOpenAd;
 
@@ -27,9 +26,7 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
-  
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -37,7 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-   theme: ThemeData(
+      theme: ThemeData(
         primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -46,5 +43,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

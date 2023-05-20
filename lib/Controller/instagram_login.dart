@@ -23,7 +23,8 @@ class InstaLoginState extends State<InstaLogin> {
         javascriptMode: JavascriptMode.unrestricted,
         initialUrl: 'https://www.instagram.com/accounts/login/',
         navigationDelegate: (navigation) {
-          if (!navigation.url.contains("https://www.instagram.com/accounts/login/")) {
+          if (!navigation.url
+              .contains("https://www.instagram.com/accounts/login/")) {
             Navigator.pop(context);
             return NavigationDecision.prevent;
           } else {
