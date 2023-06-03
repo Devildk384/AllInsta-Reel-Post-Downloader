@@ -18,7 +18,7 @@ import 'package:allIns/RecentListStartwithUpdate.dart';
 import 'package:webview_cookie_manager/webview_cookie_manager.dart' as wb;
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 
-// import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,49 +40,49 @@ class _HomePageState extends State<HomePage> {
 
   bool isUpdate = false;
 
-  // BannerAd? _bannerAd;
+  BannerAd? _bannerAd;
 
-  // InterstitialAd? _interstitialAd;
-  // bool _isInterstitialAdLoaded = false;
+  InterstitialAd? _interstitialAd;
+  bool _isInterstitialAdLoaded = false;
 
   @override
   void initState() {
-    // downloadController;
-    // checkCookies();
-    // print(downloadController);
-    // print("DSMDSKJDSJKDSJKDS");
-    // _bannerAd = BannerAd(
-    //   adUnitId: "ca-app-pub-8947607922376336/9629827794",
-    //   size: AdSize.banner,
-    //   listener: BannerAdListener(
-    //     onAdLoaded: (_) {
-    //       setState(() {
-    //         // _isBottomBannerAdLoaded = true;
-    //       });
-    //     },
-    //     onAdFailedToLoad: (ad, error) {
-    //       setState(() {
-    //         // _isBottomBannerAdLoaded = false;
-    //       });
-    //       ad.dispose();
-    //     },
-    //   ),
-    //   request: const AdRequest(),
-    // )..load();
-    //  InterstitialAd.load(
-    //   adUnitId: "ca-app-pub-8947607922376336/2382689325",
-    //   request: const AdRequest(),
-    //   adLoadCallback: InterstitialAdLoadCallback(
-    //     onAdLoaded: (InterstitialAd ad) {
-    //       _interstitialAd = ad;
-    //       _isInterstitialAdLoaded = true;
-    //     },
-    //     onAdFailedToLoad: (LoadAdError error) {
-    //       _isInterstitialAdLoaded = false;
-    //       _interstitialAd?.dispose();
-    //     },
-    //   ),
-    // );
+    downloadController;
+    checkCookies();
+    print(downloadController);
+    print("DSMDSKJDSJKDSJKDS");
+    _bannerAd = BannerAd(
+      adUnitId: "ca-app-pub-8947607922376336/5464580409",
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            // _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          setState(() {
+            // _isBottomBannerAdLoaded = false;
+          });
+          ad.dispose();
+        },
+      ),
+      request: const AdRequest(),
+    )..load();
+    InterstitialAd.load(
+      adUnitId: "ca-app-pub-8947607922376336/7184006128",
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          _interstitialAd = ad;
+          _isInterstitialAdLoaded = true;
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          _isInterstitialAdLoaded = false;
+          _interstitialAd?.dispose();
+        },
+      ),
+    );
 
     super.initState();
   }
@@ -195,11 +195,13 @@ class _HomePageState extends State<HomePage> {
                                       width: 50,
                                       child: IconButton(
                                           onPressed: () {
-                                            //    if (_isInterstitialAdLoaded) {
-                                            //       print("sdds...................................");
-                                            // _interstitialAd?.show(); // <- here
-                                            // }
-                                            // Get.to(DownloadedList());
+                                            if (_isInterstitialAdLoaded) {
+                                              print(
+                                                  "sdds...................................");
+                                              _interstitialAd
+                                                  ?.show(); // <- here
+                                            }
+                                            Get.to(DownloadedList());
                                             navigateSecondPage();
                                           },
                                           icon: const Icon(
@@ -220,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.only(right: 0, left: 10),
                           child: Image(
                             image: AssetImage(
-                              "images/allinsta.png",
+                              "images/allins.png",
                             ),
                             height: 70,
                           ),
@@ -443,10 +445,10 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        //    SizedBox(
-                        //   height: 200,
-                        //   child: AdWidget(ad: _bannerAd!),
-                        // ),
+                        SizedBox(
+                          height: 100,
+                          child: AdWidget(ad: _bannerAd!),
+                        ),
                       ],
                     ),
                   ),

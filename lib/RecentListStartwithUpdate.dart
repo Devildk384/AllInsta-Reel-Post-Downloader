@@ -6,23 +6,18 @@ import 'package:allIns/GenerateVideoFromPath.dart';
 import 'package:allIns/GenrateImageFromPath.dart';
 import 'package:get/get.dart';
 import 'package:fluttericon/linecons_icons.dart';
-import 'package:allIns/Controller/DownloadController.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class RecentList extends StatefulWidget {
-  final String? path;
-  late bool? update;
+class RecentListStartUpdate extends StatefulWidget {
+  // final bool isUpdate;
 
-  RecentList({this.path, this.update, super.key});
-
+  const RecentListStartUpdate({super.key});
   @override
   // ignore: library_private_types_in_public_api
-  _RecentListState createState() => _RecentListState();
+  _RecentListStartUpdateState createState() => _RecentListStartUpdateState();
 }
 
-class _RecentListState extends State<RecentList> {
-  DownloadController downloadController = Get.put(DownloadController());
-
+class _RecentListStartUpdateState extends State<RecentListStartUpdate> {
   var box = GetStorage();
   bool loadingVideos = true;
   List allImages = [];
@@ -36,20 +31,17 @@ class _RecentListState extends State<RecentList> {
 
   @override
   void initState() {
-    print("SDKJDDSJKDSJKDS");
-    if (isVideos && widget.update == true) {
-      var allData = box.read("all") ?? [];
-      // var allImagesdata = box.read("allImage") ?? [];
-      var reversedList = new List.from(allData.reversed);
+    print(
+        "widget.isUpdatewidget.isUpdatewidget.isUpdatewidget.isUpdatewidget.isUpdate");
 
-      all = [
-        ...reversedList,
-      ];
-      print("...............................................");
-      print(allVideos);
-      print("...............................................");
-    }
+    var allData = box.read("all") ?? [];
+    // var allImagesdata = box.read("allImage") ?? [];
+    var reversedList = new List.from(allData.reversed);
 
+    all = [...reversedList];
+    print("...............................................");
+    print(allData);
+    print("...............................................");
     InterstitialAd.load(
       adUnitId: "ca-app-pub-8947607922376336/7184006128",
       request: const AdRequest(),
@@ -64,30 +56,28 @@ class _RecentListState extends State<RecentList> {
         },
       ),
     );
+    // print(widget.path);
     // if (widget.path != null) {
     //   print("ddkjdjkfdjfdkkkkkkkkkkkkkkkkkk");
     // }
     // updateImageState();
     // updateVideoState();
     // loadingVideos = false;
+
     super.initState();
   }
 
   updateState(value) async {
-    if (value == "videos") {
-      setState(() {
-        isVideos = true;
-        allVideos = box.read("allVideo") ?? [];
-        print("...............................................");
-        print(allVideos);
-        print("...............................................");
-      });
-    } else {
-      setState(() {
-        isVideos = false;
-        allImages = box.read("allImage") ?? [];
-      });
-    }
+    setState(() {
+      var allData = box.read("all") ?? [];
+      // var allImagesdata = box.read("allImage") ?? [];
+      var reversedList = new List.from(allData.reversed);
+
+      all = [...reversedList];
+      print("...............................................");
+      print(allData);
+      print("...............................................");
+    });
   }
 
   updateImageState() async {
@@ -102,21 +92,10 @@ class _RecentListState extends State<RecentList> {
     });
   }
 
-  // updateImageState(value) async {
-  //   print("sdsddskjdskldskdskldsklsdklsdksdksdksdklklklsdklsdklds");
-  //   setState(() {
-  //     allImages = box.read("allImage") ?? [];
-  //   });
-  // }
-
-  // updateVideoState(value) async {
-  //   setState(() {
-  //     allVideos = box.read("allVideo") ?? [];
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
+    print("widget.isUpdate");
+
     return Container(
       height: 280,
       decoration: const BoxDecoration(),
@@ -139,11 +118,17 @@ class _RecentListState extends State<RecentList> {
                   }
                   Get.to(DownloadedList());
                 },
-                child: const Text(
-                  "View All",
-                  textAlign: TextAlign.end,
-                  style: TextStyle(color: Colors.white),
-                ),
+                child: all.length > 0
+                    ? const Text(
+                        "View All",
+                        textAlign: TextAlign.end,
+                        style: TextStyle(color: Colors.white),
+                      )
+                    : const Text(
+                        "",
+                        textAlign: TextAlign.end,
+                        style: TextStyle(color: Colors.white),
+                      ),
               ),
             ),
           ),
@@ -188,11 +173,12 @@ class CategoriesTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Column(
+      child: Container(
+          child: Column(
         children: <Widget>[
           ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: SizedBox(
+              child: Container(
                 // color: Colors.red,
                 height: 220,
                 width: 150,
@@ -201,7 +187,7 @@ class CategoriesTile extends StatelessWidget {
                     : GenrateVideoFrompath(path ?? "", false, updateVideoState),
               )),
         ],
-      ),
+      )),
     );
   }
 }

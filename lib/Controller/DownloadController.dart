@@ -14,6 +14,7 @@ import 'package:allIns/model/insta_post_without_login.dart';
 import 'package:webview_cookie_manager/webview_cookie_manager.dart' as wb;
 import 'package:external_path/external_path.dart';
 import 'dart:math';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DownloadController extends GetxController {
   var processing = false.obs;
@@ -104,6 +105,14 @@ class DownloadController extends GetxController {
           }
         }
       } else {
+        Fluttertoast.showToast(
+            msg: "${"May be Private Video or Please Login to download"}",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 50,
+            backgroundColor: Color.fromARGB(54, 0, 0, 0),
+            textColor: Colors.black,
+            fontSize: 20.0);
         await Navigator.push(
             context, MaterialPageRoute(builder: (_) => InstaLogin()));
       }
@@ -226,6 +235,14 @@ class DownloadController extends GetxController {
           videoURLLLLL = post.graphql?.shortcodeMedia?.videoUrl;
         }
       } else {
+        Fluttertoast.showToast(
+            msg: "${"May be Private Video or Please Login to download"}",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 50,
+            backgroundColor: Color.fromARGB(54, 0, 0, 0),
+            textColor: Colors.black,
+            fontSize: 20.0);
         await Navigator.push(
             context, MaterialPageRoute(builder: (_) => InstaLogin()));
       }
@@ -261,6 +278,14 @@ class DownloadController extends GetxController {
         await _startVideoDownload(link, context).then((value) {
           if (value == null) throw Exception();
           path = value;
+          Fluttertoast.showToast(
+              msg: "Download Successfully",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Color.fromARGB(54, 0, 0, 0),
+              textColor: Colors.white,
+              fontSize: 16.0);
           update();
           List allImagesPath = box.read("allVideo") ?? [];
           List allPath = box.read("all") ?? [];
@@ -288,6 +313,14 @@ class DownloadController extends GetxController {
               }
 
               void updateFunction() {
+                Fluttertoast.showToast(
+                    msg: "Download Successfully",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Color.fromARGB(54, 0, 0, 0),
+                    textColor: Colors.white,
+                    fontSize: 16.0);
                 update();
               }
 
@@ -308,6 +341,14 @@ class DownloadController extends GetxController {
           } else if (value.isNotEmpty && value.length < 2) {
             for (var element in value) {
               path = element;
+              Fluttertoast.showToast(
+                  msg: "Download Successfully",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Color.fromARGB(54, 0, 0, 0),
+                  textColor: Colors.white,
+                  fontSize: 16.0);
               update();
               List allImagesPath = box.read("allImage") ?? [];
               List allPath = box.read("all") ?? [];

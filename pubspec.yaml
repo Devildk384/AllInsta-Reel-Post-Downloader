@@ -44,7 +44,7 @@ dependencies:
   get_storage: ^2.0.3
   better_player: ^0.0.83
   video_thumbnail: ^0.5.3
-  webview_flutter: ^3.0.4
+  webview_flutter: ^4.2.1
   webview_cookie_manager: ^2.0.6
   external_path: ^1.0.3
   photo_view: ^0.14.0
@@ -54,7 +54,9 @@ dependencies:
   image_picker: ^0.8.7
   share_plus: ^6.3.1
   double_back_to_close_app: ^2.1.0
-  # google_mobile_ads: ^2.3.0
+  google_mobile_ads: ^2.3.0
+  fluttertoast: ^8.2.1
+
 
 dev_dependencies:
   flutter_test:
@@ -89,6 +91,8 @@ flutter:
     - images/alldownloads.png
     - images/allinsta.png
     - images/mainlogo.png
+    - images/allins.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -7,7 +7,7 @@ import 'package:allIns/GenerateVideoFromPath.dart';
 import 'package:allIns/GenrateImageFromPath.dart';
 import 'package:get/get.dart';
 import 'package:fluttericon/linecons_icons.dart';
-// import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:allIns/home.dart';
 import 'package:allIns/Controller/DownloadController.dart';
 
@@ -26,11 +26,11 @@ class _DownloadedListState extends State<DownloadedList> {
   bool isVideos = true;
   bool isVideoDelete = false;
 
-  // BannerAd? _bannerAd;
-  // late AppOpenAd? myAppOpenAd;
+  late BannerAd _bannerAd;
+  late AppOpenAd? myAppOpenAd;
 
-  // InterstitialAd? _interstitialAd;
-  // bool _isInterstitialAdLoaded = false;
+  InterstitialAd? _interstitialAd;
+  bool _isInterstitialAdLoaded = false;
 
   @override
   void initState() {
@@ -40,40 +40,40 @@ class _DownloadedListState extends State<DownloadedList> {
       print(allVideos);
       print("...............................................");
     }
-    //   loadingVideos = false;
-    //   _bannerAd = BannerAd(
-    //     adUnitId: "ca-app-pub-8947607922376336/9629827794",
-    //     size: AdSize.banner,
-    //     listener: BannerAdListener(
-    //       onAdLoaded: (_) {
-    //         setState(() {
-    //           // _isBottomBannerAdLoaded = true;
-    //         });
-    //       },
-    //       onAdFailedToLoad: (ad, error) {
-    //         setState(() {
-    //           // _isBottomBannerAdLoaded = false;
-    //         });
-    //         ad.dispose();
-    //       },
-    //     ),
-    //     request: const AdRequest(),
-    //   )..load();
+    loadingVideos = false;
+    _bannerAd = BannerAd(
+      adUnitId: "ca-app-pub-8947607922376336/5464580409",
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            // _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          setState(() {
+            // _isBottomBannerAdLoaded = false;
+          });
+          ad.dispose();
+        },
+      ),
+      request: const AdRequest(),
+    )..load();
 
-    //  InterstitialAd.load(
-    //     adUnitId: "ca-app-pub-8947607922376336/2382689325",
-    //     request: const AdRequest(),
-    //     adLoadCallback: InterstitialAdLoadCallback(
-    //       onAdLoaded: (InterstitialAd ad) {
-    //         _interstitialAd = ad;
-    //         _isInterstitialAdLoaded = true;
-    //       },
-    //       onAdFailedToLoad: (LoadAdError error) {
-    //         _isInterstitialAdLoaded = false;
-    //         _interstitialAd?.dispose();
-    //       },
-    //     ),
-    //   );
+    InterstitialAd.load(
+      adUnitId: "ca-app-pub-8947607922376336/7184006128",
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          _interstitialAd = ad;
+          _isInterstitialAdLoaded = true;
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          _isInterstitialAdLoaded = false;
+          _interstitialAd?.dispose();
+        },
+      ),
+    );
 
     super.initState();
   }
@@ -188,10 +188,11 @@ class _DownloadedListState extends State<DownloadedList> {
                           width: 50,
                           child: IconButton(
                               onPressed: () {
-                                // if (_isInterstitialAdLoaded) {
-                                //   print("sdds...................................");
-                                //   _interstitialrAd?.show(); // <- here
-                                // }
+                                if (_isInterstitialAdLoaded) {
+                                  print(
+                                      "sdds...................................");
+                                  _interstitialAd?.show(); // <- here
+                                }
                                 Navigator.of(context).pop("ddsds");
                                 // Get.to(const HomePage());
                               },
@@ -351,6 +352,10 @@ class _DownloadedListState extends State<DownloadedList> {
             //     child: AdWidget(ad: _bannerAd!),
             //     // color: Colors.red,
             //   ),
+            SizedBox(
+              height: 100,
+              child: AdWidget(ad: _bannerAd),
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
